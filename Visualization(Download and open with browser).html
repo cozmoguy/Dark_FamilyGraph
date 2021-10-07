@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>Dark Family</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Hannah", "label": "Hannah", "shape": "dot"}, {"id": "Silja", "label": "Silja", "shape": "dot"}, {"id": "Agnes", "label": "Agnes", "shape": "dot"}, {"id": "Noah", "label": "Noah", "shape": "dot"}, {"id": "Charlotte", "label": "Charlotte", "shape": "dot"}, {"id": "Franziska", "label": "Franziska", "shape": "dot"}, {"id": "Elisabeth", "label": "Elisabeth", "shape": "dot"}, {"id": "Jonas", "label": "Jonas", "shape": "dot"}, {"id": "Martha", "label": "Martha", "shape": "dot"}, {"id": "Ulrich", "label": "Ulrich", "shape": "dot"}, {"id": "Magnus", "label": "Magnus", "shape": "dot"}, {"id": "Mikkel", "label": "Mikkel", "shape": "dot"}, {"id": "Katharina", "label": "Katharina", "shape": "dot"}, {"id": "Regina", "label": "Regina", "shape": "dot"}, {"id": "Alexander", "label": "Alexander", "shape": "dot"}, {"id": "Bartosz", "label": "Bartosz", "shape": "dot"}, {"id": "Claudia", "label": "Claudia", "shape": "dot"}, {"id": "Egon", "label": "Egon", "shape": "dot"}, {"id": "Doris", "label": "Doris", "shape": "dot"}, {"id": "Peter", "label": "Peter", "shape": "dot"}, {"id": "Bernd", "label": "Bernd", "shape": "dot"}, {"id": "Greta", "label": "Greta", "shape": "dot"}, {"id": "Helge", "label": "Helge", "shape": "dot"}, {"id": "Tronte", "label": "Tronte", "shape": "dot"}, {"id": "Mads", "label": "Mads", "shape": "dot"}, {"id": "Jana", "label": "Jana", "shape": "dot"}]);
+        edges = new vis.DataSet([{"arrowStrikethrough": false, "arrows": "to", "from": "Hannah", "to": "Jonas", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Hannah", "to": "Silja", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Silja", "to": "Noah", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Silja", "to": "Agnes", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Agnes", "to": "Tronte", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Noah", "to": "Charlotte", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Charlotte", "to": "Elisabeth", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Charlotte", "to": "Franziska", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Elisabeth", "to": "Charlotte", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Ulrich", "to": "Magnus", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Ulrich", "to": "Martha", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Ulrich", "to": "Mikkel", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Mikkel", "to": "Jonas", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Katharina", "to": "Magnus", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Katharina", "to": "Martha", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Katharina", "to": "Mikkel", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Regina", "to": "Bartosz", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Alexander", "to": "Bartosz", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Bartosz", "to": "Noah", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Bartosz", "to": "Agnes", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Claudia", "to": "Regina", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Egon", "to": "Claudia", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Doris", "to": "Claudia", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Peter", "to": "Elisabeth", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Peter", "to": "Franziska", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Bernd", "to": "Helge", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Greta", "to": "Helge", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Helge", "to": "Peter", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Tronte", "to": "Ulrich", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Tronte", "to": "Mads", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Jana", "to": "Ulrich", "width": 4}, {"arrowStrikethrough": false, "arrows": "to", "from": "Jana", "to": "Mads", "width": 4}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
